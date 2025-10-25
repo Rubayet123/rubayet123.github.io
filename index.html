@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
+    <title>Rubayet Alam - Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -312,101 +312,179 @@
             transform: translateY(-3px);
         }
 
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+        /* Projects Showcase */
+        .projects-showcase {
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(226, 232, 240, 0.8);
+        .projects-hook {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease-out;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4em;
+        .hook-content {
+            padding: 60px 40px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05));
+            border-radius: 24px;
+            border: 2px solid rgba(99, 102, 241, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .project-image::before {
+        .hook-content::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
+            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.03), transparent);
+            animation: shimmer 3s infinite;
         }
 
-        .project-card:hover .project-image::before {
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .hook-title {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            position: relative;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hook-text {
+            font-size: 1.2em;
+            color: var(--text-light);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            position: relative;
+            animation: slideInRight 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .project-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.95em;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .view-projects-container {
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .btn-view-projects {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 16px;
+            font-size: 1.15em;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-view-projects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-view-projects:hover::before {
             left: 100%;
         }
 
-        .project-content {
-            padding: 25px;
+        .btn-view-projects:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
         }
 
-        .project-content h3 {
+        .btn-arrow {
             font-size: 1.5em;
-            margin-bottom: 12px;
-            color: var(--text);
+            transition: transform 0.3s ease;
         }
 
-        .project-content p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-            line-height: 1.6;
+        .btn-view-projects:hover .btn-arrow {
+            transform: translateX(8px);
         }
 
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
+        /* Projects Grid - Remove this section completely */
+        .projects-grid {
+            display: none;
         }
 
-        .tag {
-            background: rgba(99, 102, 241, 0.1);
-            padding: 6px 14px;
-            border-radius: 15px;
-            font-size: 0.85em;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-small {
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-            flex: 1;
-            text-align: center;
+        .project-card {
+            display: none;
         }
 
         .view-all-container {
@@ -555,6 +633,27 @@
                 width: 100%;
                 max-width: 300px;
             }
+
+            .hook-title {
+                font-size: 1.8em;
+            }
+
+            .hook-text {
+                font-size: 1.05em;
+            }
+
+            .project-stats {
+                gap: 30px;
+            }
+
+            .stat-number {
+                font-size: 2em;
+            }
+
+            .btn-view-projects {
+                padding: 16px 35px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -621,110 +720,6 @@
             <h2>My Projects</h2>
             <p>Check out some of my recent work and side projects</p>
         </div>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image">🔍</div>
-                <div class="project-content">
-                    <h3>Unicode Character Viewer</h3>
-                    <p>A web tool to display non-printable characters and hidden Unicode symbols in text.</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">CSS</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary btn-small">Live Demo</a>
-                        <a href="#" class="btn btn-secondary btn-small">GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">🎯</div>
-                <div class="project-content">
-                    <h3>Task Manager App</h3>
-                    <p>A powerful task management application with drag-and-drop and real-time updates.</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Firebase</span>
-                        <span class="tag">Tailwind</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary btn-small">Live Demo</a>
-                        <a href="#" class="btn btn-secondary btn-small">GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">🚀</div>
-                <div class="project-content">
-                    <h3>Weather Dashboard</h3>
-                    <p>Interactive weather app with real-time forecasts and beautiful visualizations.</p>
-                    <div class="project-tags">
-                        <span class="tag">Vue.js</span>
-                        <span class="tag">API</span>
-                        <span class="tag">Charts</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary btn-small">Live Demo</a>
-                        <a href="#" class="btn btn-secondary btn-small">GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">💬</div>
-                <div class="project-content">
-                    <h3>Chat Application</h3>
-                    <p>Real-time messaging platform with end-to-end encryption and file sharing.</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Socket.io</span>
-                        <span class="tag">Node.js</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary btn-small">Live Demo</a>
-                        <a href="#" class="btn btn-secondary btn-small">GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">📱</div>
-                <div class="project-content">
-                    <h3>E-Commerce Platform</h3>
-                    <p>Full-featured online store with shopping cart, payments, and admin panel.</p>
-                    <div class="project-tags">
-                        <span class="tag">Next.js</span>
-                        <span class="tag">Stripe</span>
-                        <span class="tag">MongoDB</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary btn-small">Live Demo</a>
-                        <a href="#" class="btn btn-secondary btn-small">GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">📊</div>
-                <div class="project-content">
-                    <h3>Analytics Dashboard</h3>
-                    <p>Beautiful data visualization dashboard with real-time metrics and insights.</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">D3.js</span>
-                        <span class="tag">API</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary btn-small">Live Demo</a>
-                        <a href="#" class="btn btn-secondary btn-small">GitHub</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
         <div class="view-all-container">
             <a href="./projects.html" class="btn-view-all">View All Projects</a>
         </div>
