@@ -3,429 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rubayet TV Hub</title>
+    <title>Dhaka Flix</title>
     <style>
-        /* Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: #0f0c29;
             color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             min-height: 100vh;
-            padding: 2rem;
-            line-height: 1.6;
+            padding: 1rem;
         }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-        }
+        .container { max-width: 1600px; margin: auto; }
 
         h1 {
-            font-size: 3.5rem;
-            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            color: #bdc3c7;
-            font-weight: 300;
-        }
-
-        /* Section Styling */
-        .section {
-            margin-bottom: 4rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .section:hover {
-            transform: translateY(-5px);
-        }
-
-        .section-title {
+            text-align: center;
             font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            color: #feca57;
-            position: relative;
-            padding-bottom: 0.8rem;
-            display: inline-block;
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #feca57, #ff6b6b);
-            border-radius: 2px;
+        .section {
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-size: 1.4rem;
+            color: #feca57;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.8rem;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            position: relative;
-            overflow: hidden;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 0.9rem;
+            text-align: center;
+            transition: all 0.25s;
+            border: 1px solid rgba(255,255,255,0.12);
             cursor: pointer;
         }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
-        }
-
-        .card:hover::before {
-            left: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        .card:hover, .card:focus-within {
+            background: rgba(255,255,255,0.18);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             border-color: #feca57;
         }
 
         .card-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #48dbfb;
-            font-weight: 600;
-        }
-
-        .card-desc {
             font-size: 0.95rem;
-            color: #bdc3c7;
-            margin-bottom: 1rem;
-            word-break: break-all;
+            font-weight: 600;
+            color: #48dbfb;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .btn {
-            display: inline-block;
+            display: block;
             background: linear-gradient(45deg, #ff6b6b, #feca57);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
+            color: #fff;
+            font-size: 0.8rem;
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            padding: 0.45rem 0.8rem;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.25s;
+            box-shadow: 0 2px 8px rgba(255,107,107,0.4);
         }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
-            background: linear-gradient(45deg, #feca57, #ff6b6b);
+        .btn:hover, .btn:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,107,0.6);
         }
 
         /* Icons */
         .icon {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
-            vertical-align: middle;
-            background: #48dbfb;
-            mask-size: contain;
-            mask-repeat: no-repeat;
-            -webkit-mask-size: contain;
-            -webkit-mask-repeat: no-repeat;
+            width: 18px; height: 18px; display: inline-block;
+            background: #48dbfb; mask-size: contain; mask-repeat: no-repeat;
+            -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat;
         }
-
         .icon-movie { mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M18.5 2H5.5C3.57 2 2 3.57 2 5.5v13C2 20.43 3.57 22 5.5 22h13c1.93 0 3.5-1.57 3.5-3.5v-13c0-1.93-1.57-3.5-3.5-3.5zM10 16H7v-3h3v3zm0-5H7V8h3v3zm5 5h-3v-3h3v3zm0-5h-3V8h3v3z"/></svg>'); -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M18.5 2H5.5C3.57 2 2 3.57 2 5.5v13C2 20.43 3.57 22 5.5 22h13c1.93 0 3.5-1.57 3.5-3.5v-13c0-1.93-1.57-3.5-3.5-3.5zM10 16H7v-3h3v3zm0-5H7V8h3v3zm5 5h-3v-3h3v3zm0-5h-3V8h3v3z"/></svg>'); }
         .icon-tv { mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>'); -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>'); }
         .icon-server { mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M4 6h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg>'); -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M4 6h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg>'); }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .section-title { font-size: 1.8rem; }
-            .grid { grid-template-columns: 1fr; }
-            body { padding: 1rem; }
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 2rem; }
-            .card { padding: 1.2rem; }
-            .btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
-        }
-
-        /* TV Remote Friendly Focus */
-        .card:focus-within,
-        .btn:focus {
+        /* Focus for TV remote */
+        .card:focus-within, .btn:focus {
             outline: 3px solid #feca57;
             outline-offset: 2px;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* Footer */
         footer {
             text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            color: #7f8c8d;
-            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* Ultra compact on small screens */
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+            h1 { font-size: 1.8rem; }
+            .card { padding: 0.7rem; }
+            .card-title { font-size: 0.85rem; }
+            .btn { font-size: 0.75rem; padding: 0.4rem 0.6rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Rubayet TV Hub</h1>
-            <p class="subtitle">Your All-in-One Entertainment Portal for Android TV</p>
-        </header>
+<div class="container">
+    <h1>Dhaka Flix TV</h1>
 
-        <!-- Dhaka Flix Section -->
-        <section class="section">
-            <h2 class="section-title"><span class="icon icon-movie"></span>Dhaka Flix</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3 class="card-title">TV & WEB Series</h3>
-                    <p class="card-desc">http://172.16.50.12/DHAKA-FLIX-12/TV-WEB-Series/</p>
-                    <a href="http://172.16.50.12/DHAKA-FLIX-12/TV-WEB-Series/" class="btn" target="_blank">Watch Now</a>
-                </div>
+    <!-- DHAKA FLIX -->
+    <section class="section">
+        <h2 class="section-title"><span class="icon icon-movie"></span>Dhaka Flix</h2>
+        <div class="grid">
+            <div class="card"><h3 class="card-title">TV & WEB Series</h3><a href="http://172.16.50.12/DHAKA-FLIX-12/TV-WEB-Series/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">English Movies</h3><a href="http://172.16.50.7/DHAKA-FLIX-7/English%20Movies/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">English 1080p</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/English%20Movies%20%281080p%29/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Foreign Movies</h3><a href="http://172.16.50.7/DHAKA-FLIX-7/Foreign%20Language%20Movies/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">IMDb Top 250</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/IMDb%20Top-250%20Movies/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Korean Series</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/KOREAN%20TV%20%26%20WEB%20Series/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Hindi Movies</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/Hindi%20Movies/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">South Indian</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/SOUTH%20INDIAN%20MOVIES/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Bangla Movies</h3><a href="http://172.16.50.7/DHAKA-FLIX-7/Kolkata%20Bangla%20Movies/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Animation</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Animation 1080p</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies%20%281080p%29/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Anime Series</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/Anime%20%26%20Cartoon%20TV%20Series/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">3D Movies</h3><a href="http://172.16.50.7/DHAKA-FLIX-7/3D%20Movies/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Documentary</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/Documentary/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Tutorial</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/Tutorial/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">Awards & Shows</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/Awards%20%26%20TV%20Shows/" class="btn">Play</a></div>
+            <div class="card"><h3 class="card-title">WWE & AEW</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/WWE%20%26%20AEW%20Wrestling/" class="btn">Play</a></div>
+        </div>
+    </section>
 
-                <div class="card">
-                    <h3 class="card-title">English Movies</h3>
-                    <p class="card-desc">http://172.16.50.7/DHAKA-FLIX-7/English%20Movies/</p>
-                    <a href="http://172.16.50.7/DHAKA-FLIX-7/English%20Movies/" class="btn" target="_blank">Watch Now</a>
-                </div>
+    <!-- MEDIA SERVER -->
+    <section class="section">
+        <h2 class="section-title"><span class="icon icon-server"></span>Media Server</h2>
+        <div class="grid">
+            <div class="card"><h3 class="card-title">Server 1</h3><a href="http://10.16.100.244/" class="btn">Open</a></div>
+            <div class="card"><h3 class="card-title">Server 2</h3><a href="http://172.16.50.4/" class="btn">Open</a></div>
+            <div class="card"><h3 class="card-title">CircleFTP</h3><a href="http://new.circleftp.net/" class="btn">Open</a></div>
+            <div class="card"><h3 class="card-title">Server 3</h3><a href="http://172.27.27.84/" class="btn">Open</a></div>
+            <div class="card"><h3 class="card-title">DiscoveryFTP</h3><a href="https://movies.discoveryftp.net/" class="btn">Open</a></div>
+            <div class="card"><h3 class="card-title">Server 4</h3><a href="http://10.20.30.40/" class="btn">Open</a></div>
+        </div>
+    </section>
 
-                <div class="card">
-                    <h3 class="card-title">English Movies (1080p)</h3>
-                    <p class="card-desc">http://172.16.50.14/DHAKA-FLIX-14/English%20Movies%20%281080p%29/</p>
-                    <a href="http://172.16.50.14/DHAKA-FLIX-14/English%20Movies%20%281080p%29/" class="btn" target="_blank">Watch Now</a>
-                </div>
+    <!-- LIVE TV -->
+    <section class="section">
+        <h2 class="section-title"><span class="icon icon-tv"></span>Live TV</h2>
+        <div class="grid">
+            <div class="card"><h3 class="card-title">RedForce</h3><a href="http://redforce.live/" class="btn">Watch</a></div>
+            <div class="card"><h3 class="card-title">Local Live</h3><a href="http://10.16.100.244/livetv.php#top" class="btn">Watch</a></div>
+            <div class="card"><h3 class="card-title">RoarZone</h3><a href="http://tv.roarzone.info/" class="btn">Watch</a></div>
+            <div class="card"><h3 class="card-title">IPTV Local</h3><a href="http://10.10.10.2/" class="btn">Watch</a></div>
+            <div class="card"><h3 class="card-title">Skyline TV</h3><a href="https://skylinetv.netlify.app/" class="btn">Watch</a></div>
+            <div class="card"><h3 class="card-title">Stream</h3><a href="http://10.99.99.99/" class="btn">Watch</a></div>
+        </div>
+    </section>
 
-                <div class="card">
-                    <h3 class="card-title">Foreign Language Movies</h3>
-                    <p class="card-desc">http://172.16.50.7/DHAKA-FLIX-7/Foreign%20Language%20Movies/</p>
-                    <a href="http://172.16.50.7/DHAKA-FLIX-7/Foreign%20Language%20Movies/" class="btn" target="_blank">Watch Now</a>
-                </div>
+    <footer>D-Pad Navigation • OK to Open • Local Network Only</footer>
+</div>
 
-                <div class="card">
-                    <h3 class="card-title">IMDb Top 250 Movies</h3>
-                    <p class="card-desc">http://172.16.50.14/DHAKA-FLIX-14/IMDb%20Top-250%20Movies/</p>
-                    <a href="http://172.16.50.14/DHAKA-FLIX-14/IMDb%20Top-250%20Movies/" class="btn" target="_blank">Watch Now</a>
-                </div>
+<script>
+    // Open all links in same tab (no Chrome popup)
+    document.addEventListener('click', e => {
+        const a = e.target.closest('a');
+        if (a?.href) {
+            e.preventDefault();
+            window.location = a.href;
+        }
+    });
 
-                <div class="card">
-                    <h3 class="card-title">Korean TV & Web Series</h3>
-                    <p class="card-desc">http://172.16.50.14/DHAKA-FLIX-14/KOREAN%20TV%20%26%20WEB%20Series/</p>
-                    <a href="http://172.16.50.14/DHAKA-FLIX-14/KOREAN%20TV%20%26%20WEB%20Series/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Hindi Movies</h3>
-                    <p class="card-desc">http://172.16.50.14/DHAKA-FLIX-14/Hindi%20Movies/</p>
-                    <a href="http://172.16.50.14/DHAKA-FLIX-14/Hindi%20Movies/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">South Indian Movies</h3>
-                    <p class="card-desc">http://172.16.50.14/DHAKA-FLIX-14/SOUTH%20INDIAN%20MOVIES/</p>
-                    <a href="http://172.16.50.14/DHAKA-FLIX-14/SOUTH%20INDIAN%20MOVIES/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Kolkata Bangla Movies</h3>
-                    <p class="card-desc">http://172.16.50.7/DHAKA-FLIX-7/Kolkata%20Bangla%20Movies/</p>
-                    <a href="http://172.16.50.7/DHAKA-FLIX-7/Kolkata%20Bangla%20Movies/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Animation Movies</h3>
-                    <p class="card-desc">http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies/</p>
-                    <a href="http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Animation Movies (1080p)</h3>
-                    <p class="card-desc">http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies%20%281080p%29/</p>
-                    <a href="http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies%20%281080p%29/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Anime & Cartoon TV Series</h3>
-                    <p class="card-desc">http://172.16.50.9/DHAKA-FLIX-9/Anime%20%26%20Cartoon%20TV%20Series/</p>
-                    <a href="http://172.16.50.9/DHAKA-FLIX-9/Anime%20%26%20Cartoon%20TV%20Series/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">3D Movies</h3>
-                    <p class="card-desc">http://172.16.50.7/DHAKA-FLIX-7/3D%20Movies/</p>
-                    <a href="http://172.16.50.7/DHAKA-FLIX-7/3D%20Movies/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Documentary</h3>
-                    <p class="card-desc">http://172.16.50.9/DHAKA-FLIX-9/Documentary/</p>
-                    <a href="http://172.16.50.9/DHAKA-FLIX-9/Documentary/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Tutorial</h3>
-                    <p class="card-desc">http://172.16.50.9/DHAKA-FLIX-9/Tutorial/</p>
-                    <a href="http://172.16.50.9/DHAKA-FLIX-9/Tutorial/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Awards & TV Shows</h3>
-                    <p class="card-desc">http://172.16.50.9/DHAKA-FLIX-9/Awards%20%26%20TV%20Shows/</p>
-                    <a href="http://172.16.50.9/DHAKA-FLIX-9/Awards%20%26%20TV%20Shows/" class="btn" target="_blank">Watch Now</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">WWE & AEW Wrestling</h3>
-                    <p class="card-desc">http://172.16.50.9/DHAKA-FLIX-9/WWE%20%26%20AEW%20Wrestling/</p>
-                    <a href="http://172.16.50.9/DHAKA-FLIX-9/WWE%20%26%20AEW%20Wrestling/" class="btn" target="_blank">Watch Now</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Media Server Section -->
-        <section class="section">
-            <h2 class="section-title"><span class="icon icon-server"></span>Media Server</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3 class="card-title">IccFTP</h3>
-                    <p class="card-desc">http://10.16.100.244/</p>
-                    <a href="http://10.16.100.244/" class="btn" target="_blank">Access</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Local Server 2</h3>
-                    <p class="card-desc">DhakaflixFTP/</p>
-                    <a href="http://172.16.50.4/" class="btn" target="_blank">Access</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">CircleFTP</h3>
-                    <p class="card-desc">http://new.circleftp.net/</p>
-                    <a href="http://new.circleftp.net/" class="btn" target="_blank">Access</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Wow</h3>
-                    <p class="card-desc">http://172.27.27.84/</p>
-                    <a href="http://172.27.27.84/" class="btn" target="_blank">Access</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">DiscoveryFTP</h3>
-                    <p class="card-desc">https://movies.discoveryftp.net/</p>
-                    <a href="https://movies.discoveryftp.net/" class="btn" target="_blank">Access</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Local Server 4</h3>
-                    <p class="card-desc">BASPlay</p>
-                    <a href="http://10.20.30.40/" class="btn" target="_blank">Access</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Live TV Section -->
-        <section class="section">
-            <h2 class="section-title"><span class="icon icon-tv"></span>Live TV</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3 class="card-title">RedForce Live</h3>
-                    <p class="card-desc">http://redforce.live/</p>
-                    <a href="http://redforce.live/" class="btn" target="_blank">Watch Live</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Local Live TV</h3>
-                    <p class="card-desc">http://10.16.100.244/livetv.php#top</p>
-                    <a href="http://10.16.100.244/livetv.php#top" class="btn" target="_blank">Watch Live</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">RoarZone TV</h3>
-                    <p class="card-desc">http://tv.roarzone.info/</p>
-                    <a href="http://tv.roarzone.info/" class="btn" target="_blank">Watch Live</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Local IPTV</h3>
-                    <p class="card-desc">http://10.10.10.2/</p>
-                    <a href="http://10.10.10.2/" class="btn" target="_blank">Watch Live</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Skyline TV</h3>
-                    <p class="card-desc">https://skylinetv.netlify.app/</p>
-                    <a href="https://skylinetv.netlify.app/" class="btn" target="_blank">Watch Live</a>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">Local Stream</h3>
-                    <p class="card-desc">http://10.99.99.99/</p>
-                    <a href="http://10.99.99.99/" class="btn" target="_blank">Watch Live</a>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <p>Optimized for Android TV • Use D-Pad to Navigate • Press OK to Open</p>
-            <p>&copy; 2025 Dhaka Flix TV Hub. Local Network Entertainment Portal.</p>
-        </footer>
-    </div>
-
-    <script>
-        // Enhance accessibility for TV remote
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.card a');
-            cards.forEach(link => {
-                link.setAttribute('tabindex', '0');
-            });
-        });
-    </script>
+    // Make buttons focusable
+    document.querySelectorAll('.btn').forEach(b => b.tabIndex = 0);
+</script>
 </body>
 </html>
