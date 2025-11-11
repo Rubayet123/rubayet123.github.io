@@ -3,122 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhaka Flix</title>
+    <title>Dhaka Flix TV</title>
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            background: #0f0c29;
-            color: #fff;
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
-            padding: 1rem;
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            background:#0f0c29;color:#fff;
+            font-family:'Segoe UI',sans-serif;
+            min-height:100vh;padding:1rem;
         }
-        .container { max-width: 1600px; margin: auto; }
+        .container{max-width:1600px;margin:auto;}
 
-        h1 {
-            text-align: center;
-            font-size: 2.2rem;
-            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
+        h1{
+            text-align:center;font-size:2.2rem;
+            background:linear-gradient(90deg,#ff6b6b,#feca57,#48dbfb);
+            -webkit-background-clip:text;background-clip:text;
+            -webkit-text-fill-color:transparent;
+            margin-bottom:1rem;letter-spacing:1px;
         }
 
-        .section {
-            margin-bottom: 1.5rem;
-        }
-        .section-title {
-            font-size: 1.4rem;
-            color: #feca57;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .section{margin-bottom:1.5rem;}
+        .section-title{
+            font-size:1.4rem;color:#feca57;margin-bottom:.8rem;
+            display:flex;align-items:center;gap:8px;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 0.8rem;
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+            gap:.8rem;
         }
 
-        .card {
-            background: rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 0.9rem;
-            text-align: center;
-            transition: all 0.25s;
-            border: 1px solid rgba(255,255,255,0.12);
-            cursor: pointer;
+        /* ---------- CARD (FULLY CLICKABLE) ---------- */
+        .card{
+            position:relative;
+            background:rgba(255,255,255,0.08);
+            border-radius:12px;padding:0.9rem;
+            text-align:center;transition:all .25s;
+            border:1px solid rgba(255,255,255,0.12);
+            cursor:pointer;overflow:hidden;
         }
-        .card:hover, .card:focus-within {
-            background: rgba(255,255,255,0.18);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            border-color: #feca57;
-        }
-
-        .card-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #48dbfb;
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .card:hover,.card:focus-within{
+            background:rgba(255,255,255,0.18);
+            transform:translateY(-4px);
+            box-shadow:0 8px 20px rgba(0,0,0,0.4);
+            border-color:#feca57;
         }
 
-        .btn {
-            display: block;
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            color: #fff;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.45rem 0.8rem;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: all 0.25s;
-            box-shadow: 0 2px 8px rgba(255,107,107,0.4);
+        .card-title{
+            font-size:0.95rem;font-weight:600;color:#48dbfb;
+            margin-bottom:0.5rem;line-height:1.3;
+            display:-webkit-box;-webkit-line-clamp:2;
+            -webkit-box-orient:vertical;overflow:hidden;
         }
-        .btn:hover, .btn:focus {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,107,107,0.6);
+
+        .btn{
+            display:block;background:linear-gradient(45deg,#ff6b6b,#feca57);
+            color:#fff;font-size:0.8rem;font-weight:600;
+            padding:0.45rem 0.8rem;border-radius:20px;
+            text-decoration:none;transition:all .25s;
+            box-shadow:0 2px 8px rgba(255,107,107,0.4);
+            margin-top:0.4rem;
+        }
+        .btn:hover,.btn:focus{
+            transform:translateY(-2px);
+            box-shadow:0 5px 15px rgba(255,107,107,0.6);
+        }
+
+        /* Hidden real link – used only for navigation */
+        .card a{
+            position:absolute;inset:0;z-index:1;
+            /* no visual impact */
         }
 
         /* Icons */
-        .icon {
-            width: 18px; height: 18px; display: inline-block;
-            background: #48dbfb; mask-size: contain; mask-repeat: no-repeat;
-            -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat;
-        }
-        .icon-movie { mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M18.5 2H5.5C3.57 2 2 3.57 2 5.5v13C2 20.43 3.57 22 5.5 22h13c1.93 0 3.5-1.57 3.5-3.5v-13c0-1.93-1.57-3.5-3.5-3.5zM10 16H7v-3h3v3zm0-5H7V8h3v3zm5 5h-3v-3h3v3zm0-5h-3V8h3v3z"/></svg>'); -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M18.5 2H5.5C3.57 2 2 3.57 2 5.5v13C2 20.43 3.57 22 5.5 22h13c1.93 0 3.5-1.57 3.5-3.5v-13c0-1.93-1.57-3.5-3.5-3.5zM10 16H7v-3h3v3zm0-5H7V8h3v3zm5 5h-3v-3h3v3zm0-5h-3V8h3v3z"/></svg>'); }
-        .icon-tv { mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>'); -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>'); }
-        .icon-server { mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M4 6h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg>'); -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M4 6h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg>'); }
+        .icon{width:18px;height:18px;display:inline-block;
+            background:#48dbfb;mask-size:contain;mask-repeat:no-repeat;
+            -webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;}
+        .icon-movie{mask-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M18.5 2H5.5C3.57 2 2 3.57 2 5.5v13C2 20.43 3.57 22 5.5 22h13c1.93 0 3.5-1.57 3.5-3.5v-13c0-1.93-1.57-3.5-3.5-3.5zM10 16H7v-3h3v3zm0-5H7V8h3v3zm5 5h-3v-3h3v3zm0-5h-3V8h3v3z"/></svg>');-webkit-mask-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M18.5 2H5.5C3.57 2 2 3.57 2 5.5v13C2 20.43 3.57 22 5.5 22h13c1.93 0 3.5-1.57 3.5-3.5v-13c0-1.93-1.57-3.5-3.5-3.5zM10 16H7v-3h3v3zm0-5H7V8h3v3zm5 5h-3v-3h3v3zm0-5h-3V8h3v3z"/></svg>');}
+        .icon-tv{mask-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>');-webkit-mask-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>');}
+        .icon-server{mask-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M4 6h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg>');-webkit-mask-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M4 6h16v4H4zm0 6h16v4H4zm0 6h16v4H4z"/></svg>');}
 
-        /* Focus for TV remote */
-        .card:focus-within, .btn:focus {
-            outline: 3px solid #feca57;
-            outline-offset: 2px;
-        }
+        /* TV remote focus */
+        .card:focus-within{outline:3px solid #feca57;outline-offset:2px;}
 
-        footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.8rem;
-            color: #777;
+        footer{
+            text-align:center;margin-top:1.5rem;font-size:0.8rem;color:#777;
         }
 
-        /* Ultra compact on small screens */
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
-            h1 { font-size: 1.8rem; }
-            .card { padding: 0.7rem; }
-            .card-title { font-size: 0.85rem; }
-            .btn { font-size: 0.75rem; padding: 0.4rem 0.6rem; }
+        @media(max-width:768px){
+            .grid{grid-template-columns:repeat(3,1fr);gap:.6rem;}
+            h1{font-size:1.8rem;}
+            .card{padding:.7rem;}
+            .card-title{font-size:0.85rem;}
+            .btn{font-size:0.75rem;padding:.4rem .6rem;}
         }
     </style>
 </head>
@@ -130,23 +107,23 @@
     <section class="section">
         <h2 class="section-title"><span class="icon icon-movie"></span>Dhaka Flix</h2>
         <div class="grid">
-            <div class="card"><h3 class="card-title">TV & WEB Series</h3><a href="http://172.16.50.12/DHAKA-FLIX-12/TV-WEB-Series/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">English Movies</h3><a href="http://172.16.50.7/DHAKA-FLIX-7/English%20Movies/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">English 1080p</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/English%20Movies%20%281080p%29/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Foreign Movies</h3><a href="http://172.16.50.7/DHAKA-FLIX-7/Foreign%20Language%20Movies/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">IMDb Top 250</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/IMDb%20Top-250%20Movies/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Korean Series</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/KOREAN%20TV%20%26%20WEB%20Series/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Hindi Movies</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/Hindi%20Movies/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">South Indian</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/SOUTH%20INDIAN%20MOVIES/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Bangla Movies</h3><a href="http://172.16.50.7/DHAKA-FLIX-7/Kolkata%20Bangla%20Movies/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Animation</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Animation 1080p</h3><a href="http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies%20%281080p%29/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Anime Series</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/Anime%20%26%20Cartoon%20TV%20Series/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">3D Movies</h3><a href="http://172.16.50.7/DHAKA-FLIX-7/3D%20Movies/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Documentary</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/Documentary/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Tutorial</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/Tutorial/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">Awards & Shows</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/Awards%20%26%20TV%20Shows/" class="btn">Play</a></div>
-            <div class="card"><h3 class="card-title">WWE & AEW</h3><a href="http://172.16.50.9/DHAKA-FLIX-9/WWE%20%26%20AEW%20Wrestling/" class="btn">Play</a></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.12/DHAKA-FLIX-12/TV-WEB-Series/"></a><h3 class="card-title">TV & WEB Series</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.7/DHAKA-FLIX-7/English%20Movies/"></a><h3 class="card-title">English Movies</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.14/DHAKA-FLIX-14/English%20Movies%20%281080p%29/"></a><h3 class="card-title">English 1080p</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.7/DHAKA-FLIX-7/Foreign%20Language%20Movies/"></a><h3 class="card-title">Foreign Movies</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.14/DHAKA-FLIX-14/IMDb%20Top-250%20Movies/"></a><h3 class="card-title">IMDb Top 250</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.14/DHAKA-FLIX-14/KOREAN%20TV%20%26%20WEB%20Series/"></a><h3 class="card-title">Korean Series</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.14/DHAKA-FLIX-14/Hindi%20Movies/"></a><h3 class="card-title">Hindi Movies</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.14/DHAKA-FLIX-14/SOUTH%20INDIAN%20MOVIES/"></a><h3 class="card-title">South Indian</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.7/DHAKA-FLIX-7/Kolkata%20Bangla%20Movies/"></a><h3 class="card-title">Bangla Movies</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies/"></a><h3 class="card-title">Animation</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.14/DHAKA-FLIX-14/Animation%20Movies%20%281080p%29/"></a><h3 class="card-title">Animation 1080p</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.9/DHAKA-FLIX-9/Anime%20%26%20Cartoon%20TV%20Series/"></a><h3 class="card-title">Anime Series</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.7/DHAKA-FLIX-7/3D%20Movies/"></a><h3 class="card-title">3D Movies</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.9/DHAKA-FLIX-9/Documentary/"></a><h3 class="card-title">Documentary</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.9/DHAKA-FLIX-9/Tutorial/"></a><h3 class="card-title">Tutorial</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.9/DHAKA-FLIX-9/Awards%20%26%20TV%20Shows/"></a><h3 class="card-title">Awards & Shows</h3><div class="btn">Play</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.9/DHAKA-FLIX-9/WWE%20%26%20AEW%20Wrestling/"></a><h3 class="card-title">WWE & AEW</h3><div class="btn">Play</div></div>
         </div>
     </section>
 
@@ -154,12 +131,12 @@
     <section class="section">
         <h2 class="section-title"><span class="icon icon-server"></span>Media Server</h2>
         <div class="grid">
-            <div class="card"><h3 class="card-title">Server 1</h3><a href="http://10.16.100.244/" class="btn">Open</a></div>
-            <div class="card"><h3 class="card-title">Server 2</h3><a href="http://172.16.50.4/" class="btn">Open</a></div>
-            <div class="card"><h3 class="card-title">CircleFTP</h3><a href="http://new.circleftp.net/" class="btn">Open</a></div>
-            <div class="card"><h3 class="card-title">Server 3</h3><a href="http://172.27.27.84/" class="btn">Open</a></div>
-            <div class="card"><h3 class="card-title">DiscoveryFTP</h3><a href="https://movies.discoveryftp.net/" class="btn">Open</a></div>
-            <div class="card"><h3 class="card-title">Server 4</h3><a href="http://10.20.30.40/" class="btn">Open</a></div>
+            <div class="card" tabindex="0"><a href="http://10.16.100.244/"></a><h3 class="card-title">Server 1</h3><div class="btn">Open</div></div>
+            <div class="card" tabindex="0"><a href="http://172.16.50.4/"></a><h3 class="card-title">Server 2</h3><div class="btn">Open</div></div>
+            <div class="card" tabindex="0"><a href="http://new.circleftp.net/"></a><h3 class="card-title">CircleFTP</h3><div class="btn">Open</div></div>
+            <div class="card" tabindex="0"><a href="http://172.27.27.84/"></a><h3 class="card-title">Server 3</h3><div class="btn">Open</div></div>
+            <div class="card" tabindex="0"><a href="https://movies.discoveryftp.net/"></a><h3 class="card-title">DiscoveryFTP</h3><div class="btn">Open</div></div>
+            <div class="card" tabindex="0"><a href="http://10.20.30.40/"></a><h3 class="card-title">Server 4</h3><div class="btn">Open</div></div>
         </div>
     </section>
 
@@ -167,12 +144,12 @@
     <section class="section">
         <h2 class="section-title"><span class="icon icon-tv"></span>Live TV</h2>
         <div class="grid">
-            <div class="card"><h3 class="card-title">RedForce</h3><a href="http://redforce.live/" class="btn">Watch</a></div>
-            <div class="card"><h3 class="card-title">Local Live</h3><a href="http://10.16.100.244/livetv.php#top" class="btn">Watch</a></div>
-            <div class="card"><h3 class="card-title">RoarZone</h3><a href="http://tv.roarzone.info/" class="btn">Watch</a></div>
-            <div class="card"><h3 class="card-title">IPTV Local</h3><a href="http://10.10.10.2/" class="btn">Watch</a></div>
-            <div class="card"><h3 class="card-title">Skyline TV</h3><a href="https://skylinetv.netlify.app/" class="btn">Watch</a></div>
-            <div class="card"><h3 class="card-title">Stream</h3><a href="http://10.99.99.99/" class="btn">Watch</a></div>
+            <div class="card" tabindex="0"><a href="http://redforce.live/"></a><h3 class="card-title">RedForce</h3><div class="btn">Watch</div></div>
+            <div class="card" tabindex="0"><a href="http://10.16.100.244/livetv.php#top"></a><h3 class="card-title">Local Live</h3><div class="btn">Watch</div></div>
+            <div class="card" tabindex="0"><a href="http://tv.roarzone.info/"></a><h3 class="card-title">RoarZone</h3><div class="btn">Watch</div></div>
+            <div class="card" tabindex="0"><a href="http://10.10.10.2/"></a><h3 class="card-title">IPTV Local</h3><div class="btn">Watch</div></div>
+            <div class="card" tabindex="0"><a href="https://skylinetv.netlify.app/"></a><h3 class="card-title">Skyline TV</h3><div class="btn">Watch</div></div>
+            <div class="card" tabindex="0"><a href="http://10.99.99.99/"></a><h3 class="card-title">Stream</h3><div class="btn">Watch</div></div>
         </div>
     </section>
 
@@ -180,17 +157,22 @@
 </div>
 
 <script>
-    // Open all links in same tab (no Chrome popup)
+    // Open links in same tab (prevents Chrome pop-up)
     document.addEventListener('click', e => {
-        const a = e.target.closest('a');
-        if (a?.href) {
+        const link = e.target.closest('a');
+        if (link && link.href) {
             e.preventDefault();
-            window.location = a.href;
+            window.location = link.href;
         }
     });
 
-    // Make buttons focusable
-    document.querySelectorAll('.btn').forEach(b => b.tabIndex = 0);
+    // Optional: Enter key also works
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && e.target.closest('.card')) {
+            const link = e.target.closest('.card').querySelector('a');
+            if (link) window.location = link.href;
+        }
+    });
 </script>
 </body>
 </html>
